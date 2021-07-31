@@ -8,6 +8,6 @@ return array(
 	|--------------------------------------------------------------------------
 	|
 	*/
-	"description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut tortor rutrum massa efficitur tincidunt vel nec lacus. Curabitur porta aliquet diam, eu gravida neque lacinia.",
+	"description" => "Dyskova is Africa's first subscription based content-on-demand (COD) platform, that allows users watch exclusive videos and content from their favorite celebrities and creators. ",
 	"keywords" => "donations,support,creators,sponzy,subscription,content",
 );
