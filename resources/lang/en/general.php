@@ -15,7 +15,7 @@ return array(
 	'start_my_page' => 'Start my page',
 	'edit_my_page' => 'Edit my page',
 	'my_page' => 'My page',
-	'subtitle_welcome' => 'Sponzy is designed to help content creators on the web, create a free account and start making money now.',
+	'subtitle_welcome' => 'Dyskova is designed to help content creators on the web, create a free account and start making money now.',
 	'install_success' => 'Installation completed successfully!',
 
 	// Box #2 On Index
@@ -588,7 +588,7 @@ return array(
 	'alert_content_adult' => 'Attention! This site contains adult content, by accessing you acknowledge that you are 18 years of age.',
 	'i_am_age' => 'I am of age',
 	'leave' => 'Leave',
-	'pwa_short_name' => 'App short name (Ex: Sponzy)',
+	'pwa_short_name' => 'App short name (Ex: Dyskova)',
 	'alert_pwa_https' => 'You must use HTTPS (SSL) for PWA to work.',
 	'error_internet_disconnected_pwa' => 'You are currently not connected to any networks.',
 	'error_internet_disconnected_pwa_2' => 'Check your connection and try again',
