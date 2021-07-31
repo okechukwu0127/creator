@@ -72,12 +72,17 @@ class AddFundsController extends Controller
       'image.required_if' => trans('general.please_select_image'),
   );
 
+  //echo json_encode($messages);
+  //exit();
+
   //<---- Validation
   $validator = Validator::make($this->request->all(), [
       'amount' => 'required|integer|min:'.$this->settings->min_deposits_amount.'|max:'.$this->settings->max_deposits_amount,
       'payment_gateway' => 'required|check_payment_gateway',
       'image' => 'required_if:payment_gateway,==,3|mimes:jpg,gif,png,jpe,jpeg|max:'.$this->settings->file_size_allowed_verify_account.'',
       ], $messages);
+
+       
 
     if ($validator->fails()) {
             return response()->json([
@@ -358,8 +363,7 @@ class AddFundsController extends Controller
 
     $amountEze = $this->request->amount + ($this->request->amount * $fee / 100) + $cents;
 
-     //echo auth()->user()->paystack_authorization_code .' - '.auth()->user()->email . ' - ' .$amountEze  .' - '.number_format($this->request->amount + ($this->request->amount * $fee / 100)+ $cents,2,'.',',') ;
-    //exit();
+     
 
    
 
@@ -384,8 +388,11 @@ class AddFundsController extends Controller
     // Delay execution while payment is processing
     sleep(2);
 
+    
+
     return response()->json([
       "success" => true,
+     // "payment" => "wallet",
       'instantPayment' => true
     ]);
 

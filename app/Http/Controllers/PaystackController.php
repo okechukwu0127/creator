@@ -162,7 +162,8 @@ class PaystackController extends Controller
             $subscription->save();
 
             // Send Email to User and Notification
-            //Subscriptions::sendEmailAndNotify(auth()->user()->name, $user->id);
+            
+            Subscriptions::sendEmailAndNotify(auth()->user()->name, $user->id);
 
         } catch (\Exception $exception) {
           return response()->json([

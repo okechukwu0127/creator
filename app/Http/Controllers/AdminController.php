@@ -487,6 +487,7 @@ class AdminController extends Controller
 		$fullNameUser = $user->name;
 		$_emailUser   = $user->email;
 
+		 try{
 		Mail::send('emails.withdrawal-processed', array(
 					'amount'     => $amount,
 					'title_site' => $titleSite,
@@ -498,6 +499,13 @@ class AdminController extends Controller
 									  ->to($_emailUser, $fullNameUser)
 										->subject( trans('general.withdrawal_processed').' - '.$titleSite );
 				});
+
+			}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 			//<------ Send Email to User ---------->>>
 
 		return redirect('panel/admin/withdrawals');
@@ -1064,6 +1072,7 @@ else {
 			$member->save();
 
 			//<------ Send Email to User ---------->>>
+			 try{
 			Mail::send('emails.account_verification', array(
 				'body' => trans('general.body_account_verification_approved'),
 				'title_site' => $titleSite,
@@ -1075,6 +1084,13 @@ else {
 										  ->to($emailUser, $fullNameUser)
 											->subject(trans('general.account_verification_approved').' - '.$titleSite);
 					});
+
+				}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 				//<------ End Send Email to User ---------->>>
 
 				\Session::flash('success_message', trans('admin.success_update'));
@@ -1096,6 +1112,8 @@ else {
 			$member->save();
 
 			//<------ Send Email to User ---------->>>
+			try 
+			{
 			Mail::send('emails.account_verification', array(
 				'body' => trans('general.body_account_verification_reject'),
 				'title_site' => $titleSite,
@@ -1107,6 +1125,12 @@ else {
 										  ->to($emailUser, $fullNameUser)
 											->subject(trans('general.account_verification_not_approved').' - '.$titleSite);
 					});
+				}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 				//<------ End Send Email to User ---------->>>
 
 			 \Session::flash('success_message', trans('admin.success_update'));
@@ -1370,6 +1394,10 @@ else {
 	 $_title_site    = $this->settings->title;
 	 $_email_noreply = $this->settings->email_no_reply;
 
+	 try
+	 {
+
+	 
 	 Mail::send('emails.verify', array('confirmation_code' => $confirmation_code, 'isProfile' => null),
 	 function($message) use (
 			 $_username,
@@ -1381,6 +1409,12 @@ else {
 							$message->subject(trans('users.title_email_verify'));
 							$message->to($_email_user,$_username);
 					});
+			}
+			catch ( \Swift_TransportException $e)
+			{
+				//echo $e->getMessage().' - \n - '.$user->verification_code;
+
+			} 
 
 		\Session::flash('success_message', trans('general.send_success'));
 
@@ -1415,6 +1449,8 @@ else {
 		$fullNameUser = $sql->user()->name;
 		$emailUser   =  $sql->user()->email;
 
+		try
+		{
 		Mail::send('emails.transfer_verification', array(
 			'body' => trans('general.info_transfer_verified', ['amount' => Helper::amountFormat($sql->amount)]),
 			'type' => 'approve',
@@ -1427,6 +1463,12 @@ else {
 										->to($emailUser, $fullNameUser)
 										->subject(trans('general.transfer_verified').' - '.$titleSite);
 				});
+				}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 			//<------ End Send Email to User ---------->>>
 
 		return redirect('panel/admin/deposits');
@@ -1448,6 +1490,8 @@ else {
 			$fullNameUser = $sql->user()->name;
 			$emailUser   =  $sql->user()->email;
 
+			try
+			{
 			Mail::send('emails.transfer_verification', array(
 				'body' => trans('general.info_transfer_not_verified', ['amount' => Helper::amountFormat($sql->amount)]),
 				'type' => 'not_approve',
@@ -1460,6 +1504,13 @@ else {
 											->to($emailUser, $fullNameUser)
 											->subject(trans('general.transfer_not_verified').' - '.$titleSite);
 					});
+
+				}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 				//<------ End Send Email to User ---------->>>
 
       return redirect('panel/admin/deposits');

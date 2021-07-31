@@ -37,17 +37,26 @@ class Subscriptions extends Model
 
 			if ($user->email_new_subscriber == 'yes') {
 				//<------ Send Email to User ---------->>>
+				 try{
 				Mail::send('emails.new_subscriber', [
 					'body' => $subject,
 					'title_site' => $titleSite,
 					'fullname'   => $fullNameUser
 				],
+				
 					function($message) use ($sender, $subject, $fullNameUser, $titleSite, $emailUser)
 						{
 					    $message->from($sender, $titleSite)
 										  ->to($emailUser, $fullNameUser)
 											->subject($subject.' - '.$titleSite);
 						});
+
+						 }
+              catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 					//<------ End Send Email to User ---------->>>
 			}
 

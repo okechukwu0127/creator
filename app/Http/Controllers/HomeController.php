@@ -304,6 +304,7 @@ class HomeController extends Controller
        $subject     = $input['subject'];
   		 $email_reply = $settings->email_admin;
 
+       try {
        Mail::send('emails.contact-email', array(
          'full_name' => $input['full_name'],
          'email' => $input['email'],
@@ -322,6 +323,13 @@ class HomeController extends Controller
             $message->to($email_reply,$title_site);
             $message->replyTo($email_user);
           });
+
+          	}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 
       return redirect('contact')->with(['notification' => trans('general.send_contact_success')]);
   	}

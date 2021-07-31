@@ -309,6 +309,9 @@
 			dataType : 'json',
 			success:  function(result) {
 
+				console.log(result)
+				alert(JSON.stringify(result))
+
 				// Wallet
 				if (result.success == true && payment == 'wallet' || result.success && result.instantPayment) {
 					swal({
@@ -320,7 +323,7 @@
 	 				 $('#tipForm').modal('hide');
 	 				 $('.InputElement').val('');
 	 				 $('#formSendTip').trigger("reset");
-	 				 $('#tipBtn').removeAttr('disabled');
+	 				 $('#tipBtn').removeAttr('disabled');  
 	 				 $('#tipBtn').find('i').removeClass('spinner-border spinner-border-sm align-middle mr-1');
 					 $('.balanceWallet').html(result.wallet);
 				}

@@ -215,6 +215,7 @@ class SubscriptionsController extends Controller
      // Add Earnings to User
      $creator->increment('balance', $userEarning);
 
+     
      // Send Email to User and Notification
      Subscriptions::sendEmailAndNotify(auth()->user()->name, $creator->id);
 

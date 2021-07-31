@@ -121,6 +121,7 @@ class RegisterController extends Controller
 		 $_title_site    = $settings->title;
 		 $_email_noreply = $settings->email_no_reply;
 
+     try {
 		 Mail::send('emails.verify', ['confirmation_code' => $confirmation_code, 'isProfile' => $isProfile],
 		 function($message) use (
 				 $_username,
@@ -132,6 +133,13 @@ class RegisterController extends Controller
                 $message->subject(trans('users.title_email_verify'));
                 $message->to($_email_user,$_username);
             });
+
+            	}
+				catch ( \Swift_TransportException $e)
+                {
+                    //echo $e->getMessage().' - \n - '.$user->verification_code;
+
+                } 
 
 		} else {
 			$confirmation_code = '';

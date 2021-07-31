@@ -340,7 +340,7 @@
 
                   <div class="text-center">
                     <button type="button" class="btn e-none mt-4" data-dismiss="modal">{{trans('admin.cancel')}}</button>
-                    <button type="submit" id="tipBtn" class="btn btn-primary mt-4 tipBtn"><i></i> {{trans('general.pay')}}</button>
+                    <button type="submit" id="tipBtn" class="btn btn-primary mt-4 tipBtn"><i></i>  {{trans('general.pay')}}</button>
                   </div>
                 </form>
               </div>
